@@ -4,7 +4,7 @@ import { FeedbacksRepository } from '../repositories/feedbacks-repository';
 interface SubmitFeedbackUseCaseRequest {
   type: string;
   comment: string;
-  scheenshot?: string;
+  screenshot?: string;
 }
 
 export class SubmitFeedbackUseCase {    
@@ -14,7 +14,7 @@ export class SubmitFeedbackUseCase {
   ) {}
 
   async execute(request: SubmitFeedbackUseCaseRequest) {
-    const { type, comment, scheenshot } = request;
+    const { type, comment, screenshot } = request;
 
     if(!type) {
       throw new Error('Type is required');
@@ -24,14 +24,14 @@ export class SubmitFeedbackUseCase {
       throw new Error('Comment is required');
     }
 
-    if(scheenshot && !scheenshot.startsWith('data:image/png;base64')) {
+    if(screenshot && !screenshot.startsWith('data:image/png;base64')) {
       throw new Error('Invalid screenshot format.')
     }
 
     await this.feedbackRepository.create({
       type,
       comment,
-      scheenshot,
+      screenshot,
     })
 
     await this.mailAdapter.sendMail({
@@ -40,7 +40,7 @@ export class SubmitFeedbackUseCase {
         `<div style="font-family: sans-serif; font-size: 16px; color: #222;">`,
         `<p>Tipo do feedback: ${type}</p>`,
         `<p>Comentário: ${comment}</p>`,
-        scheenshot ? `<img src="${scheenshot}" />` : ``,
+        screenshot ? `<img src="${screenshot}" />` : ``,
         `</div>`,
       ].join('\n')
     })

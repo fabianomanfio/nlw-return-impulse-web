@@ -1,7 +1,7 @@
 export interface FeedbackCreateDate {
   type: string;
   comment: string;
-  scheenshot?: string;
+  screenshot?: string;
 }
 
 

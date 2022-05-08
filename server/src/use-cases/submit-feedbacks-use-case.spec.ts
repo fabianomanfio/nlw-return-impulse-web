@@ -16,7 +16,7 @@ describe('Submit Feedback', () => {
     await expect(submitFeedback.execute({
       type: 'BYG',
       comment: 'example comment',
-      scheenshot: 'data:image/png;base64, asdaksdahsdkajhdkajhds',
+      screenshot: 'data:image/png;base64, asdaksdahsdkajhdkajhds',
     })).resolves.not.toThrow();
 
     expect(createFeedbackSpy).toHaveBeenCalled();
@@ -28,7 +28,7 @@ describe('Submit Feedback', () => {
     await expect(submitFeedback.execute({
       type: '',
       comment: 'example comment',
-      scheenshot: 'data:image/png;base64, asdaksdahsdkajhdkajhds',
+      screenshot: 'data:image/png;base64, asdaksdahsdkajhdkajhds',
     })).rejects.toThrow();
   })
 
@@ -37,7 +37,7 @@ describe('Submit Feedback', () => {
     await expect(submitFeedback.execute({
       type: 'BUG',
       comment: '',
-      scheenshot: 'date:image/png;base64, asdaksdahsdkajhdkajhds',
+      screenshot: 'date:image/png;base64, asdaksdahsdkajhdkajhds',
     })).rejects.toThrow();
   })
 
@@ -46,7 +46,7 @@ describe('Submit Feedback', () => {
     await expect(submitFeedback.execute({
       type: 'BUG',
       comment: 'exemple comment',
-      scheenshot: 'test.jpg',
+      screenshot: 'test.jpg',
     })).rejects.toThrow();
   })
 })
